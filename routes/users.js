@@ -22,8 +22,9 @@ router.post('/signup', async function(req, res, next) {
     if(result['_id']) { // mongodb가 생성한 유니크id와 입력한 이름(메인화면 표시용)을 반환함. 반환된 유니크 id와 이름은 asyncstorage로 저장할것.
         res.json({
           "code":"success",
-          "uniqid":result['_id'],
-          "name": name
+          "uid":result['_id'],
+          "name": name,
+          "depart":depart
         });
     }
     else {
@@ -44,11 +45,13 @@ router.post('/login', async function(req, res, next) {
   const id = req.body['userid'];
   const pw = req.body['userpw'];
   const result = await Users.findUser(id, pw);
+  console.log(result);
   if(result['_id']) { // mongodb가 생성한 유니크id와 입력한 이름(메인화면 표시용)을 반환함. 반환된 유니크 id와 이름은 asyncstorage로 저장할것.
     res.json({
       "code":"success",
-      "uniqid":result['_id'],
-      "name": name
+      "uid":result['_id'],
+      "name":result['name'],
+      "depart":result['department']
     });
   }
   else {
@@ -59,7 +62,7 @@ router.post('/login', async function(req, res, next) {
 })
 
 router.post('/delete', async function(req, res, next) {
-  const uid = req.body['unuqid'];
+  const uid = req.body['uid'];
   const result = await Users.deleteUser(uid);
   if(result) { // 탈퇴 요청시 uid로 검색된 유저정보를 제거하고 결과를 반환함.
     res.json({

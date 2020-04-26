@@ -8,7 +8,9 @@ router.post('/insert', async function(req, res) {
     // 3. record 컬렉션에 도큐먼트로 기록
     const uid = req.body['uid'];
     const type = req.body['type'];
-    const result = await Records.recording(uid, type);
+    const depart = req.body['depart'];
+    const name = req.body['name'];
+    const result = await Records.recording(uid, name, depart, type);
     res.json(result);
 });
 
