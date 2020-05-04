@@ -17,7 +17,9 @@ router.post('/insert', async function(req, res) {
 router.post('/read', async function(req, res) {
     // 넘겨받은 uid로 db조회한 결과 바로 리턴
     const uid = req.body['uid'];
-    const result = await Records.loadRecord(uid);
+    const start = req.body['startTime'];
+    const end = req.body['endTime'];
+    const result = await Records.loadRecordSel(uid, start, end);
     res.json(result);
 });
 
