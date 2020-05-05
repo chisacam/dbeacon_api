@@ -22,11 +22,6 @@ record.statics.recording = async function (uid, name, depart, type) {
     return result.save();
 }
 
-record.statics.loadRecord = function (uid) {
-    // uid로 검색되는 모든 document 리턴
-    return this.find({"uid":uid});
-}
-
 record.statics.loadRecordSel = function (uid, start, end) {
     return this.find({"uid":uid, "time":{"$gte":new Date(start + "T00:00:00.000Z"), "$lte":new Date(end + "T00:00:00.000Z")}});
 }
