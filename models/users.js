@@ -42,7 +42,7 @@ user.statics.changeInfo = function (uid, userpw) {
     return this.update({"_id":uid}, {"password":userpw});
 }
 
-user.statics.chackInfo = function (userid, qType, qAnswer) {
+user.statics.checkInfo = function (userid, qType, qAnswer) {
     return this.findOne({
         "userid":userid,
         "qType":qType,
