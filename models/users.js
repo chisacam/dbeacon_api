@@ -6,7 +6,9 @@ const user = new mongoose.Schema({
     name: {type:String, required: true},
     userid: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    department:{type:String, required:true}
+    department:{type:String, required:true},
+    qType:{type:String},
+    qAnswer:{type:String}
 })
 
 user.statics.create = function (data) {
