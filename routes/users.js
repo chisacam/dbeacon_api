@@ -49,7 +49,7 @@ router.post('/login', async function(req, res, next) {
   const pw = req.body['userpw'];
   const result = await Users.findUser(id, pw);
   console.log(result);
-  if(result['_id']) { // mongodb가 생성한 유니크id와 입력한 이름(메인화면 표시용)을 반환함. 반환된 유니크 id와 이름은 asyncstorage로 저장할것.
+  if(result) { // mongodb가 생성한 유니크id와 입력한 이름(메인화면 표시용)을 반환함. 반환된 유니크 id와 이름은 asyncstorage로 저장할것.
     res.json({
       "code":"success",
       "uid":result['_id'],
@@ -86,7 +86,7 @@ router.post('/passcheck', async function(req,res,next) {
   const uid = req.body['uid'];
   const pass = req.body['password'];
   const result = await Users.checkPass(uid, pass);
-  if(result['_id']){
+  if(result){
     res.json({
       "code":"success"
     })
