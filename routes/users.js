@@ -101,7 +101,7 @@ router.post('/edit', async function(req,res, next) {
   const uid = req.body['uid'];
   const pass = req.body['password'];
   const result = await Users.changePass(uid, pass);
-  if(result['_id']){
+  if(result){
     res.json({
       "code":"success"
     })
@@ -118,7 +118,7 @@ router.post('/lostpass', async function(req, res, next) {
   const qAnswer = req.body['questionAnswer'];
   const pass = req.body['password'];
   const result = await Users.changeInfo(email,pass,qType,qAnswer);
-  if(result['_id']){
+  if(result){
     res.json({
       "code":"success"
     })
