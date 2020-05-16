@@ -116,8 +116,7 @@ router.post('/lostpass', async function(req, res, next) {
   const email = req.body['email'];
   const qType = req.body['questionType'];
   const qAnswer = req.body['questionAnswer'];
-  const pass = req.body['password'];
-  const result = await Users.changeInfo(email,pass,qType,qAnswer);
+  const result = await Users.changeInfo(email,qType,qAnswer);
   if(result){
     res.json({
       "code":"success"

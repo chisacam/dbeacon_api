@@ -38,14 +38,11 @@ user.statics.changePass = function (uid, userpw) {
     return this.update({"_id":uid}, {"password":userpw});
 }
 
-user.statics.changeInfo = function (userid, pass, qType, qAnswer) {
-    return this.update({
+user.statics.changeInfo = function (userid, qType, qAnswer) {
+    return this.findOne({
         "userid":userid,
         "qType":qType,
         "qAnswer":qAnswer
-    },
-    {
-        "password":pass
     })
 }
 
