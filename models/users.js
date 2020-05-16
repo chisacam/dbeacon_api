@@ -32,4 +32,23 @@ user.statics.findAll = function () {
     return this.find({});
 }
 
+user.statics.changePass = function (uid, userpw) {
+    return this.update({"_id":uid}, {"password":userpw});
+}
+
+user.statics.changeInfo = function (userid, pass, qType, qAnswer) {
+    return this.update({
+        "userid":userid,
+        "qType":qType,
+        "qAnswer":qAnswer
+    },
+    {
+        "password":pass
+    })
+}
+
+user.statics.checkPass = function (uid, userpw) {
+    return this.findOne({"_id":uid, "password":userpw})
+}
+
 module.exports = mongoose.model('User', user);

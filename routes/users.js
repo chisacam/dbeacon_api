@@ -9,14 +9,17 @@ router.post('/signup', async function(req, res, next) {
   const pwre = req.body['userpwre'];
   const depart = req.body['depart'];
   const name = req.body['name'];
-
-  
+  const qType = req.body['questionType'];
+  const qAnswer = req.body['questionAnswer'];
+  // const phone = req.body['phone'];
   if (pw == pwre) { // 앱에서 전송한 유저 정보들을 db에 저장하고, 저장결과를 받음.
     const result = await Users.create({ 
       name: name,
       userid: id,
       password: pw,
-      department: depart
+      department: depart,
+      qType: qType,
+      qAnswer: qAnswer
     })
     //console.log(result)
     if(result['_id']) { // mongodb가 생성한 유니크id와 입력한 이름(메인화면 표시용)을 반환함. 반환된 유니크 id와 이름은 asyncstorage로 저장할것.
@@ -56,7 +59,8 @@ router.post('/login', async function(req, res, next) {
   }
   else {
     res.json({
-      "code":"error"
+      "code":"error",
+      "reason":result
     })
   }
 })
@@ -72,8 +76,56 @@ router.post('/delete', async function(req, res, next) {
   }
   else {
       res.json({
-        "code":"error"
+        "code":"error",
+        "reason":result
       })
+  }
+})
+
+router.post('/passcheck', async function(req,res,next) {
+  const uid = req.body['uid'];
+  const pass = req.body['pass'];
+  const result = await Users.checkPass(uid, pass);
+  if(result['_id']){
+    res.json({
+      "code":"success"
+    })
+  } else {
+    res.json({
+      "code":"error"
+    })
+  }
+})
+
+router.post('/edit', async function(req,res, next) {
+  const uid = req.body['uid'];
+  const pass = req.body['password'];
+  const result = await Users.changePass(uid, pass);
+  if(result['_id']){
+    res.json({
+      "code":"success"
+    })
+  } else {
+    res.json({
+      "code":"error"
+    })
+  }
+})
+
+router.post('/lostpass', async function(req, res, next) {
+  const email = req.body['email'];
+  const qType = req.body['questionType'];
+  const qAnswer = req.body['questionAnswer'];
+  const pass = req.body['password'];
+  const result = await Users.changeInfo(email,pass,qType,qAnswer);
+  if(result['_id']){
+    res.json({
+      "code":"success"
+    })
+  } else {
+    res.json({
+      "code":"error"
+    })
   }
 })
 
