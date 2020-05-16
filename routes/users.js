@@ -98,9 +98,9 @@ router.post('/passcheck', async function(req,res,next) {
 })
 
 router.post('/passchange', async function(req,res,next) {
-  const uid = req.body['uid'];
+  const email = req.body['email'];
   const pass = req.body['password'];
-  const result = await Users.changePass(uid, pass);
+  const result = await Users.changePass(email, pass);
   if(result){
     res.json({
       "code":"success"
@@ -113,9 +113,9 @@ router.post('/passchange', async function(req,res,next) {
 })
 
 router.post('/edit', async function(req,res, next) {
-  const email = req.body['email'];
+  const uid = req.body['uid'];
   const pass = req.body['password'];
-  const result = await Users.changeInfo(email, pass);
+  const result = await Users.changeInfo(uid, pass);
   if(result){
     res.json({
       "code":"success"

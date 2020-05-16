@@ -39,7 +39,7 @@ user.statics.changePass = function (email, userpw) {
 }
 
 user.statics.changeInfo = function (uid, userpw) {
-    return this.update({"userid":uid}, {"password":userpw});
+    return this.update({"_id":uid}, {"password":userpw});
 }
 
 user.statics.chackInfo = function (userid, qType, qAnswer) {
