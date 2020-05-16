@@ -84,7 +84,7 @@ router.post('/delete', async function(req, res, next) {
 
 router.post('/passcheck', async function(req,res,next) {
   const uid = req.body['uid'];
-  const pass = req.body['pass'];
+  const pass = req.body['password'];
   const result = await Users.checkPass(uid, pass);
   if(result['_id']){
     res.json({
