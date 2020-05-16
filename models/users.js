@@ -34,11 +34,15 @@ user.statics.findAll = function () {
     return this.find({});
 }
 
-user.statics.changePass = function (uid, userpw) {
-    return this.update({"_id":uid}, {"password":userpw});
+user.statics.changePass = function (email, userpw) {
+    return this.update({"userid":email}, {"password":userpw});
 }
 
-user.statics.changeInfo = function (userid, qType, qAnswer) {
+user.statics.changeInfo = function (uid, userpw) {
+    return this.update({"userid":uid}, {"password":userpw});
+}
+
+user.statics.chackInfo = function (userid, qType, qAnswer) {
     return this.findOne({
         "userid":userid,
         "qType":qType,

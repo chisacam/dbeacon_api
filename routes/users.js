@@ -97,10 +97,25 @@ router.post('/passcheck', async function(req,res,next) {
   }
 })
 
-router.post('/edit', async function(req,res, next) {
+router.post('/passchange', async function(req,res,next) {
   const uid = req.body['uid'];
   const pass = req.body['password'];
   const result = await Users.changePass(uid, pass);
+  if(result){
+    res.json({
+      "code":"success"
+    })
+  } else {
+    res.json({
+      "code":"error"
+    })
+  }
+})
+
+router.post('/edit', async function(req,res, next) {
+  const email = req.body['email'];
+  const pass = req.body['password'];
+  const result = await Users.changeInfo(email, pass);
   if(result){
     res.json({
       "code":"success"
@@ -116,7 +131,7 @@ router.post('/lostpass', async function(req, res, next) {
   const email = req.body['email'];
   const qType = req.body['questionType'];
   const qAnswer = req.body['questionAnswer'];
-  const result = await Users.changeInfo(email,qType,qAnswer);
+  const result = await Users.checkInfo(email,qType,qAnswer);
   if(result){
     res.json({
       "code":"success"
