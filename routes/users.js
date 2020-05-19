@@ -9,6 +9,7 @@ router.post('/signup', async function(req, res, next) {
   const pwre = req.body['userpwre'];
   const depart = req.body['depart'];
   const name = req.body['name'];
+  const phone = req.body['phonenumber']
   const qType = req.body['questionType'];
   const qAnswer = req.body['questionAnswer'];
   // const phone = req.body['phone'];
@@ -18,6 +19,7 @@ router.post('/signup', async function(req, res, next) {
       userid: id,
       password: pw,
       department: depart,
+      phone: phone,
       qType: qType,
       qAnswer: qAnswer
     })
@@ -27,7 +29,8 @@ router.post('/signup', async function(req, res, next) {
           "code":"success",
           "uid":result['_id'],
           "name": name,
-          "depart":depart
+          "depart":depart,
+          "phone":phone
         });
     }
     else {
@@ -54,7 +57,8 @@ router.post('/login', async function(req, res, next) {
       "code":"success",
       "uid":result['_id'],
       "name":result['name'],
-      "depart":result['department']
+      "depart":result['department'],
+      "phone":result['phone']
     });
   }
   else {

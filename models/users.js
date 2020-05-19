@@ -7,6 +7,7 @@ const user = new mongoose.Schema({
     userid: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     department:{type:String, required:true},
+    phone:{type:String, required:true},
     qType:{type:String},
     qAnswer:{type:String}
 })
