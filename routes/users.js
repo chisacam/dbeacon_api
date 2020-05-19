@@ -12,7 +12,7 @@ router.post('/signup', async function(req, res, next) {
   const phone = req.body['phonenumber']
   const qType = req.body['questionType'];
   const qAnswer = req.body['questionAnswer'];
-  // const phone = req.body['phone'];
+
   if (pw == pwre) { // 앱에서 전송한 유저 정보들을 db에 저장하고, 저장결과를 받음.
     const result = await Users.create({ 
       name: name,

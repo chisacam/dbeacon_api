@@ -14,7 +14,7 @@ router.post('/insert', async function(req, res) {
     res.json(result);
 });
 
-router.post('/readSel', async function(req, res) {
+router.post('/read', async function(req, res) {
     // 넘겨받은 uid로 db조회한 결과 바로 리턴
     const uid = req.body['uid'];
     const start = req.body['startTime'];
@@ -22,12 +22,5 @@ router.post('/readSel', async function(req, res) {
     const result = await Records.loadRecordSel(uid, start, end);
     res.json(result);
 });
-
-router.post('/readAll', async function (req, res) {
-    // read와 동일하나 최근 30일의 기록만 보여줌
-    const uid = req.body['uid'];
-    const result = await Records.loadRecordAll(uid);
-    res.json(result);
-})
 
 module.exports = router;
