@@ -2,6 +2,91 @@ const express = require('express');
 const router = express.Router();
 const Users = require('../models/users');
 
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: 유저 기능 API
+ * definitions:
+ *   Signup_request:
+ *     type: object
+ *     required:
+ *       - userid
+ *       - userpw
+ *       - depart
+ *       - name
+ *       - phonenumber
+ *     properties:
+ *       userid:
+ *         type: string
+ *         description: 아이디
+ *       userpw:
+ *         type: string
+ *         description: 비밀번호
+ *       userpwre:
+ *         type: string
+ *         desctiption: 비밀번호 확인
+ *       depart:
+ *         type: string
+ *         description: 부서명
+ *       name:
+ *         type: string
+ *         description: 이름
+ *       phonenumber:
+ *         type: string
+ *         description: 전화번호
+ *       questionType:
+ *         type: string
+ *         description: 질문유형
+ *       questionAnswer:
+ *         type: string
+ *         description: 답변
+ */
+
+/**
+ * @swagger
+ * paths:
+ *   /users/signup:
+ *     post:
+ *       tags:
+ *         - User
+ *       summary: signup api
+ *       description: ''
+ *       consumes:
+ *         - application/json
+ *       produces:
+ *         - applicaiton/json
+ *       parameters:
+ *         - in: body
+ *           name: body
+ *           description: 회원가입 정보 전달
+ *           required: true
+ *           schema:
+ *             $ref: '#/definitions/Signup_request'
+ *       responses:
+ *         200:
+ *           description: 로그인 성공시
+ *           schema:
+ *             type: object
+ *             properties:
+ *               code:
+ *                 type: string
+ *               uid:
+ *                 type: string
+ *               name:
+ *                 type: string
+ *               depart:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *         500:
+ *           description: 실패시
+ *           schema:
+ *             type: object
+ *             properties:
+ *               code:
+ *                 type: string
+ */
 
 router.post('/signup', async function(req, res, next) {
   const id = req.body['userid'];
